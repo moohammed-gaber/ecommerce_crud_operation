@@ -5,7 +5,6 @@ class DevicePermissions {
   Future<void> askForLocationAndStoragePermissions() async {
       Map<Permission, PermissionStatus> statuses = await [
         Permission.storage,
-        Permission.manageExternalStorage,
       ].request();
 
   }

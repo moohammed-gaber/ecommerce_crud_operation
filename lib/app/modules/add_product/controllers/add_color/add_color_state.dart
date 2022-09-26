@@ -7,7 +7,7 @@ import 'package:ecommerce_crud_operation/app/core/value_objects/product_color.da
 import 'package:file_picker/file_picker.dart';
 
 class ProductColorInput {
-  final List<PlatformFile> images;
+  final List<File> images;
   final ProductColorValueObject color;
 
   ProductColorInput({required this.images, required this.color});
@@ -18,7 +18,7 @@ class ProductColorInput {
 
   // copy with optional
   ProductColorInput copyWith(
-      {List<PlatformFile>? images, ProductColorValueObject? color}) {
+      {List<File>? images, ProductColorValueObject? color}) {
     return ProductColorInput(
         images: images ?? this.images, color: color ?? this.color);
   }

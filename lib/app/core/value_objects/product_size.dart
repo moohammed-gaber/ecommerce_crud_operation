@@ -27,19 +27,3 @@ class ProductSize {
   const ProductSize._(this.value);
 }
 
-/*
-class SmallProductSize extends ProductSize {
-  static const ProductSizeEnum _value = ProductSizeEnum.small;
-  SmallProductSize() : super._(right(_value));
-}
-
-class MediumProductSize extends ProductSize {
-  static const ProductSizeEnum _value = ProductSizeEnum.medium;
-  MediumProductSize() : super._(right(_value));
-}
-
-class LargeProductSize extends ProductSize {
-  static const ProductSizeEnum _value = ProductSizeEnum.large;
-  LargeProductSize() : super._(right(_value));
-}
-*/

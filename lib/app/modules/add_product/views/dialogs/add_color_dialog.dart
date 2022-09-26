@@ -11,7 +11,7 @@ import '../../controllers/add_color/add_color_view_contract.dart';
 class AddColorDialog extends GetView<AddColorController>
     implements AddColorViewContract {
 
-  const AddColorDialog({Key? key}) : super(key: key);
+   AddColorDialog({Key? key}) : super(key: key);
   @override
   StatelessElement createElement() {
     controller.addColorViewContract = this;
@@ -56,4 +56,5 @@ class AddColorDialog extends GetView<AddColorController>
   onSuccess(ProductColorInput productColorInput) {
     Get.back(result: productColorInput);
   }
+
 }

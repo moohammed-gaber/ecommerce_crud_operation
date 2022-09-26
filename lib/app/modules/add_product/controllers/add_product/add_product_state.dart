@@ -2,50 +2,80 @@ import 'dart:io';
 
 import 'package:ecommerce_crud_operation/app/core/entities/product_color.dart';
 import 'package:ecommerce_crud_operation/app/core/entities/product_entity.dart';
+import 'package:ecommerce_crud_operation/app/core/entities/product_variant.dart';
 import 'package:ecommerce_crud_operation/app/core/models/product_color_widget_model.dart';
 import 'package:ecommerce_crud_operation/app/core/value_objects/product_color.dart';
+import 'package:ecommerce_crud_operation/app/core/value_objects/product_name.dart';
+import 'package:ecommerce_crud_operation/app/core/value_objects/product_price.dart';
 import 'package:ecommerce_crud_operation/app/core/value_objects/product_size.dart';
 import 'package:file_picker/file_picker.dart';
 
-class AddProductState {
+class ProductState {
   final List<ProductColorWidgetModel> productColors;
   final List<ProductSize> productSizes;
   final int selectedColorIndex;
   final int selectedSizeIndex;
+  List<ProductVariant> variants;
+  ProductPrice? price;
+  final ProductName name;
 
-  AddProductState(this.productColors, this.selectedColorIndex,
-      this.productSizes, this.selectedSizeIndex);
+  ProductState(this.productColors, this.selectedColorIndex, this.productSizes,
+      this.selectedSizeIndex, this.variants, this.name,
+      {this.price});
   // copy with
-  AddProductState copyWith({
+  ProductState copyWith({
     List<ProductColorWidgetModel>? productColors,
     int? selectedColorIndex,
     List<ProductSize>? productSizes,
     int? selectedSizeIndex,
+    ProductPrice? price,
+    List<ProductVariant>? variants,
+    ProductName? name,
   }) {
-    return AddProductState(
+    return ProductState(
       productColors ?? this.productColors,
       selectedColorIndex ?? this.selectedColorIndex,
       productSizes ?? this.productSizes,
       selectedSizeIndex ?? this.selectedSizeIndex,
+      variants ?? this.variants,
+      name ?? this.name,
+      price: price ?? this.price,
     );
   }
 
-  //add color
-  AddProductState addColor(ProductColorWidgetModel productColor) {
+  ProductState addColor(ProductColorWidgetModel productColor) {
     return copyWith(
       productColors: [...productColors, productColor],
     );
   }
 
-//add size
-  AddProductState addSize(ProductSize productSize) {
+  ProductState reset() {
+    return copyWith(
+      price: null,
+      selectedColorIndex: -1,
+      selectedSizeIndex: -1,
+    );
+  }
+
+  ProductState addVariant() {
+    return copyWith(
+      variants: [
+        ...variants,
+        ProductVariant(
+            productColor: productColors[selectedColorIndex].color.color,
+            productSize: productSizes[selectedSizeIndex],
+            productPrice: price!)
+      ],
+    );
+  }
+
+  ProductState addSize(ProductSize productSize) {
     return copyWith(
       productSizes: [...productSizes, productSize],
     );
   }
 
-  // initial state
-  factory AddProductState.initial() {
-    return AddProductState([], -1, [], -1);
+  factory ProductState.initial() {
+    return ProductState([], -1, [], -1, [], ProductName(''));
   }
 }

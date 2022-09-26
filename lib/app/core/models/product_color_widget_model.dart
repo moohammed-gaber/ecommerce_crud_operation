@@ -7,7 +7,6 @@ class ProductColorWidgetModel {
   final ProductColorInput color;
   final bool isSelected;
   ProductColorWidgetModel({required this.color, this.isSelected = false});
-  // copy with is selected
   ProductColorWidgetModel copyWith({bool? isSelected}) {
     return ProductColorWidgetModel(
       color: this.color,

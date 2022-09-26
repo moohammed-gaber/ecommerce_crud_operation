@@ -8,7 +8,9 @@ environment:
 dependencies: 
   cupertino_icons: ^1.0.2
   permission_handler: ^10.0.1
+  image_picker: ^0.8.5+3
   cached_network_image: ^3.2.2
+  pretty_dio_logger: ^1.1.1
   file_picker: ^5.2.0
   flutter_colorpicker: ^1.0.3
   dartz: ^0.10.1

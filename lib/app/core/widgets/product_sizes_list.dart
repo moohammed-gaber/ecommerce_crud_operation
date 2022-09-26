@@ -46,7 +46,11 @@ class VariationCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? Colors.black : Colors.white,
+          // border
+          border: Border.all(
+            color: isSelected ? Colors.black : Colors.grey,
+            width: 1,
+          ),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(text),

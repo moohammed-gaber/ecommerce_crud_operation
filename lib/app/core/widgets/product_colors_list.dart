@@ -49,21 +49,21 @@ class ProductColorCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? Colors.black : Colors.white,
           border: Border.all(
             color: isSelected ? Colors.black : Colors.grey,
+            width: 1,
           ),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           children: [
             Text(productSize.color.color.getOrCrash()),
-/*
             Image.file(
 
-              File(productSize.color.images.first.path!),
+              File(productSize.color.images.first.path!,),
+              height: 50,
+              width: 50,
             ),
-*/
             // CachedN(productSize.color.images.length.toString()),
           ],
         ),

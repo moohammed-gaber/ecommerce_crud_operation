@@ -10,7 +10,7 @@ class AddProductBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<AddProductController>(
-      () => AddProductController(AddProductState.initial(), Get.find()),
+      () => AddProductController(ProductState.initial(), Get.find()),
     );
   }
 }

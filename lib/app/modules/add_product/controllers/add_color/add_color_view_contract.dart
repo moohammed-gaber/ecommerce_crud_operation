@@ -9,4 +9,6 @@ import 'package:file_picker/file_picker.dart';
 abstract class AddColorViewContract {
   onSuccess(ProductColorInput productColorInput);
   onFailed();
+
+
 }
