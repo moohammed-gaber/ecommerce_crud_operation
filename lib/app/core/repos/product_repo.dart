@@ -7,7 +7,9 @@ import 'package:ecommerce_crud_operation/app/modules/add_product/models/product_
 
 abstract class ProductRepo {
   Future<Either<Failure, List<Product>>> getAll();
+
   Future<Either<Failure, Product>> getById(String id);
+
   Future<Either<Failure, Product>> add(ProductInput product);
 }
 
@@ -19,16 +21,15 @@ class ProductRepoImpl implements ProductRepo {
   @override
   Future<Either<Failure, Product>> add(ProductInput product) async {
     try {
-      final body =await  product.toJsonFormData(product);
+      final body = await product.toJsonFormData(product);
       print('body is $body');
       final result = await _dio.post('/add-product',
           options: Options(
             headers: {
-              'Accept': 'application/json',
+              'Content-Type': 'application/json',
             },
           ),
-
-          data:FormData.fromMap(body));
+          data: FormData.fromMap(body));
       return right(result.data);
     } catch (e) {
       rethrow;
