@@ -45,7 +45,6 @@ class ProductColorCard extends StatelessWidget {
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    // print(productSize.color.images.first.);
     return InkWell(
       onTap: onTap,
       child: Container(

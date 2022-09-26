@@ -2,9 +2,10 @@ import 'package:ecommerce_crud_operation/app/core/models/product_size_widget_mod
 import 'package:ecommerce_crud_operation/app/core/value_objects/product_size.dart';
 import 'package:flutter/material.dart';
 
+/*
 class ProductSizesList extends StatelessWidget {
   const ProductSizesList({Key? key, required this.sizes, required this.onTap}) : super(key: key);
-  final List<ProductSizeWidgetModel> sizes;
+  final List<Size> sizes;
   final Function(int index) onTap;
   @override
   Widget build(BuildContext context) {
@@ -29,26 +30,26 @@ class ProductSizesList extends StatelessWidget {
     );
   }
 }
+*/
 
-class ProductSizeCard extends StatelessWidget {
-  const ProductSizeCard(
-      {Key? key, required this.productSize, required this.onTap})
+class VariationCard extends StatelessWidget {
+  const VariationCard(
+      {Key? key,  required this.onTap, required this.text, required this.isSelected})
       : super(key: key);
-  final ProductSizeWidgetModel productSize;
-  final VoidCallback onTap;
+  final String text;
+  // on Tap
+  final Function() onTap;
+  final bool isSelected ;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: productSize.isSelected ? Colors.black : Colors.white,
-          border: Border.all(
-            color: productSize.isSelected ? Colors.black : Colors.grey,
-          ),
+          color: isSelected ? Colors.black : Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Text(productSize.size.value.value),
+        child: Text(text),
       ),
     );
   }

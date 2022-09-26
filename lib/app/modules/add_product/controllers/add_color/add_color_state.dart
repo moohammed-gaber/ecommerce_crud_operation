@@ -24,31 +24,23 @@ class ProductColorInput {
   }
 }
 
-class AddProductState {
+class AddColorState {
   final ProductColorInput productColor;
-  final List<ProductColorWidgetModel> productColors;
-  final int selectedColorIndex;
-  AddProductState(
-      this.productColors, this.productColor, this.selectedColorIndex);
+  AddColorState(
+       this.productColor,);
   // copy with
-  AddProductState copyWith({
-    List<ProductColorWidgetModel>? productColors,
+  AddColorState copyWith({
     ProductColorInput? productColor,
-    int? selectedColorIndex,
   }) {
-    return AddProductState(
-      productColors ?? this.productColors,
+    return AddColorState(
       productColor ?? this.productColor,
-      selectedColorIndex ?? this.selectedColorIndex,
     );
   }
 
   // initial state
-  factory AddProductState.initial() {
-    return AddProductState(
-      [],
+  factory AddColorState.initial() {
+    return AddColorState(
       ProductColorInput.initial(),
-      -1
     );
   }
 }
