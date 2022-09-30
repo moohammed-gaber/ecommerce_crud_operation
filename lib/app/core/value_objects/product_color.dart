@@ -18,6 +18,7 @@ class ProductColorValueObject extends ValueObject<String> {
       validate(input),
     );
   }
+
   // copy with
   ProductColorValueObject copyWith(String color) {
     return ProductColorValueObject(color);

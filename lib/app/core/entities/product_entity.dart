@@ -18,6 +18,7 @@ class Product {
       required this.productColors,
       required this.productSizes,
       required this.productName});
+
   // copy with
   Product copyWith({
     String? id,

@@ -1,5 +1,3 @@
-import 'package:ecommerce_crud_operation/app/core/models/product_size_widget_model.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/product_size.dart';
 import 'package:flutter/material.dart';
 
 /*
@@ -34,12 +32,17 @@ class ProductSizesList extends StatelessWidget {
 
 class VariationCard extends StatelessWidget {
   const VariationCard(
-      {Key? key,  required this.onTap, required this.text, required this.isSelected})
+      {Key? key,
+      required this.onTap,
+      required this.text,
+      required this.isSelected})
       : super(key: key);
   final String text;
+
   // on Tap
   final Function() onTap;
-  final bool isSelected ;
+  final bool isSelected;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

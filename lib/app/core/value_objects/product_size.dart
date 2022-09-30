@@ -1,16 +1,13 @@
-import 'package:dartz/dartz.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/product_size.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/product_size.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/value_object.dart';
-
 enum ProductSizeEnum {
-  small('Small', 'S'),
-  medium('Medium', 'M'),
-  large('Large', 'L');
+  small('small', 'S'),
+  medium('medium', 'M'),
+  large('large', 'L');
 
   const ProductSizeEnum(this.value, this.sign);
+
   final String value;
   final String sign;
+
   String get lowerCasedSign => sign.toLowerCase();
 }
 /*
@@ -37,6 +34,7 @@ class ProductSize {
       (input),
     );
   }
+
   x() {
     ProductSizeEnum.large.lowerCasedSign;
   }
