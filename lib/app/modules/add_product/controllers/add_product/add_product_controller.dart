@@ -1,13 +1,8 @@
-import 'package:ecommerce_crud_operation/app/core/entities/product_color.dart';
-import 'package:ecommerce_crud_operation/app/core/entities/product_variant.dart';
 import 'package:ecommerce_crud_operation/app/core/models/product_color_widget_model.dart';
-import 'package:ecommerce_crud_operation/app/core/repos/product_repo.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/product_color.dart';
 import 'package:ecommerce_crud_operation/app/core/value_objects/product_name.dart';
 import 'package:ecommerce_crud_operation/app/core/value_objects/product_price.dart';
 import 'package:ecommerce_crud_operation/app/core/value_objects/product_size.dart';
 import 'package:ecommerce_crud_operation/app/modules/add_product/controllers/add_color/add_color_state.dart';
-import 'package:ecommerce_crud_operation/app/modules/add_product/controllers/add_color/add_color_view_contract.dart';
 import 'package:ecommerce_crud_operation/app/modules/add_product/controllers/add_product/add_product_events.dart';
 import 'package:ecommerce_crud_operation/app/modules/add_product/controllers/add_product/add_product_state.dart';
 import 'package:ecommerce_crud_operation/app/modules/add_product/controllers/add_product/add_product_view_contract.dart';
@@ -68,7 +63,10 @@ class AddProductController extends GetxController implements AddProductEvents {
   }
 
   @override
-  void onAddProduct() {
-    repo.add(state);
+  Future<void> onAddProduct() async {
+    final result = await repo.add(state);
+    result.fold((l) {
+      viewContract.onAddProductFailed();
+    }, (r) => null);
   }
 }

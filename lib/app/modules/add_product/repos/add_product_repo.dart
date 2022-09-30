@@ -14,7 +14,7 @@ import 'package:image_picker/image_picker.dart';
 class AddProductRepo {
   final CustomFilePicker filePicker;
   final ProductRepo productRepo;
-  final AddProductMapper mapper;
+  final ProductMapper mapper;
 
   AddProductRepo(this.productRepo, this.filePicker, this.mapper);
 

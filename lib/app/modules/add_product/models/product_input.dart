@@ -77,13 +77,79 @@ class ProductInput {
     print('sizes is ${sizes.length}');
     print('colors.length ${colors.length}');
     print('---> ');
+    final imagePath = input.productColors[0].color.images[0].path;
+    final productColorsMap = <String, dynamic>{};
+    for (int i = 0; i < productColors.length; i++) {
+      final productColor = productColors[i].color;
+      final color = productColor.color;
+      final images = productColor.images;
+      productColorsMap.addAll({
+        for (int j = 0; j < images.length; j++) ...{
+          'productColors[$i][colorImages][$j]': MultipartFile.fromFileSync(
+              images[j].path,
+              contentType: MediaType('image', 'jpeg')),
+        },
+        'productColors[$i][colorName]': color.getOrCrash()
+      });
+    }
+    final productSizesMap = <String, dynamic>{};
+
+    for (int i = 0; i < productSizes.length; i++) {
+      productSizesMap.addAll({
+        'productSizes[$i]': productSizes[i].value.value,
+      });
+    }
+    final productVariationMap = <String, dynamic>{};
+
+    for (int i = 0; i < variations.length; i++) {
+      final variation = variations[i];
+      /*
+              'productVariations[0][variantPrice]': 20,
+        'productVariations[0][variantAttributes][variantSize]': 20,
+        'productVariations[0][variantAttributes][variantColor][colorName]':
+            'test'
+
+       */
+      productVariationMap.addAll({
+        'productVariations[$i][variantPrice]': variation.,
+        'productVariations[$i][variantAttributes][variantSize]': 20,
+        'productVariations[$i][variantAttributes][variantColor][colorName]':
+            'test'
+      });
+    }
 
     final map = {
-      'productName': input.name.getOrCrash(),
-      'productColors': [...colors],
-      'productSizes': sizes,
-      'productVariations': [...variations, ],
+      'productName': 'name',
+      ...productSizesMap,
+      'productVariations[0][variantPrice]': 20,
+      'productVariations[0][variantAttributes][variantSize]': 20,
+      'productVariations[0][variantAttributes][variantColor][colorName]':
+          'test',
+      ...productColorsMap,
+/*
+      'productColors': [
+        {
+          'colorImages': [
+            MultipartFile.fromFileSync(imagePath,
+                contentType: MediaType('image', 'jpeg')),
+          ],
+          'colorName': 'colorName'
+        }
+      ],
+      'productSizes': [20],
+      'productVariations': [
+        {
+          'variantPrice': 20,
+          'variantAttributes': {
+            'variantSize': 20,
+            'variantColor': {'colorName': 'colorName'},
+          },
+        }
+              ],
+
+*/
     };
+    print(map);
     return (map);
   }
 }

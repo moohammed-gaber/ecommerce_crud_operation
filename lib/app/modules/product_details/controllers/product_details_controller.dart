@@ -1,23 +1,8 @@
+import 'package:ecommerce_crud_operation/app/core/entities/product_entity.dart';
 import 'package:get/get.dart';
 
 class ProductDetailsController extends GetxController {
-  //TODO: Implement ProductDetailsController
+  final Product product;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  ProductDetailsController(this.product);
 }

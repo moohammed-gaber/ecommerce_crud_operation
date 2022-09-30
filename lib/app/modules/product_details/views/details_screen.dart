@@ -1,27 +1,19 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ecommerce_crud_operation/app/core/entities/product_entity.dart';
-import 'package:ecommerce_crud_operation/app/modules/product_details/views/components/color_dot.dart';
-import 'package:ecommerce_crud_operation/app/modules/product_details/views/components/product_images.dart';
-import 'package:ecommerce_crud_operation/app/modules/product_details/views/constants.dart';
 import 'package:ecommerce_crud_operation/app/modules/product_details/views/product.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:ecommerce_crud_operation/app/modules/product_details/views/constants.dart';
 
-import 'package:get/get.dart';
+import 'components/color_dot.dart';
 
-import '../controllers/product_details_controller.dart';
+class DetailsScreen extends StatelessWidget {
+  const DetailsScreen({Key? key, required this.product}) : super(key: key);
 
-class ProductDetailsView extends GetView<ProductDetailsController> {
-  ProductDetailsView({
-    Key? key,
-  }) : super(key: key);
-
-  Product product = Get.arguments;
+  final ProductCardModel product;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFEFBF9),
+      backgroundColor: product.bgColor,
       appBar: AppBar(
         leading: const BackButton(color: Colors.black),
         actions: [
@@ -39,15 +31,11 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
       ),
       body: Column(
         children: [
-          ProductImages(product: product),
-
-/*
-          CachedNetworkImage(
-            imageUrl: product.images[0],
+          Image.asset(
+            product.image,
             height: MediaQuery.of(context).size.height * 0.4,
             fit: BoxFit.cover,
           ),
-*/
           const SizedBox(height: defaultPadding * 1.5),
           Expanded(
             child: Container(
@@ -67,16 +55,13 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                     children: [
                       Expanded(
                         child: Text(
-                          product.productName.getOrCrash(),
+                          product.title,
                           style: Theme.of(context).textTheme.headline6,
                         ),
                       ),
                       const SizedBox(width: defaultPadding),
                       Text(
-                        "\$" +
-                            product.productVariants[0].productPrice
-                                .getOrCrash()
-                                .toString(),
+                        "\$" + product.price.toString(),
                         style: Theme.of(context).textTheme.headline6,
                       ),
                     ],

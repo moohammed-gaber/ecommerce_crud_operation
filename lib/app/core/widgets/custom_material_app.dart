@@ -38,7 +38,8 @@ class AppBinding extends Bindings {
 
     Get.lazyPut(() => ProductRepoImpl(configuredDio.dio));
     Get.lazyPut(() => CustomFilePicker(ImagePicker()));
-    Get.lazyPut(() => AddProductRepo(Get.find<ProductRepoImpl>(), Get.find(),AddProductMapper()));
+    Get.lazyPut(() => AddProductRepo(
+        Get.find<ProductRepoImpl>(), Get.find(), ProductMapper()));
     Get.lazyPut(() => AddColorController(AddColorState.initial(), Get.find()),
         fenix: true);
     Get.lazyPut(

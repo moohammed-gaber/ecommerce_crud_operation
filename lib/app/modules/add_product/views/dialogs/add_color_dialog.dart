@@ -10,17 +10,16 @@ import '../../controllers/add_color/add_color_view_contract.dart';
 
 class AddColorDialog extends GetView<AddColorController>
     implements AddColorViewContract {
-
-   AddColorDialog({Key? key}) : super(key: key);
+  AddColorDialog({Key? key}) : super(key: key);
   @override
   StatelessElement createElement() {
     controller.addColorViewContract = this;
+
     return StatelessElement(this);
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Dialog(
       child: SingleChildScrollView(
           child: Column(
@@ -46,9 +45,9 @@ class AddColorDialog extends GetView<AddColorController>
     );
   }
 
-
   @override
   onFailed() {
+
     Get.snackbar('Error', 'Failed to add product');
   }
 
@@ -56,5 +55,4 @@ class AddColorDialog extends GetView<AddColorController>
   onSuccess(ProductColorInput productColorInput) {
     Get.back(result: productColorInput);
   }
-
 }

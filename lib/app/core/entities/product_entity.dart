@@ -11,8 +11,13 @@ class Product {
   final List<ProductSize> productSizes;
   final ProductName productName;
 
-  Product(this.id, this.images, this.productVariants, this.productColors,
-      this.productSizes, this.productName);
+  Product(
+      {required this.id,
+      required this.images,
+      required this.productVariants,
+      required this.productColors,
+      required this.productSizes,
+      required this.productName});
   // copy with
   Product copyWith({
     String? id,
@@ -23,24 +28,23 @@ class Product {
     ProductName? productName,
   }) {
     return Product(
-      id ?? this.id,
-      images ?? this.images,
-      productVariants ?? this.productVariants,
-      productColors ?? this.productColors,
-      productSizes ?? this.productSizes,
-      productName ?? this.productName,
+      id: id ?? this.id,
+      images: images ?? this.images,
+      productVariants: productVariants ?? this.productVariants,
+      productColors: productColors ?? this.productColors,
+      productSizes: productSizes ?? this.productSizes,
+      productName: productName ?? this.productName,
     );
   }
 
   // initial state
   factory Product.initial() {
     return Product(
-      '',
-      [],
-      [],
-      [],
-      [],
-      ProductName(''),
-    );
+        id: '',
+        images: [],
+        productVariants: [],
+        productColors: [],
+        productSizes: [],
+        productName: ProductName(''));
   }
 }

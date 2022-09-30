@@ -8,9 +8,16 @@ import 'app/routes/app_pages.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
- await DevicePermissions().askForLocationAndStoragePermissions();
-  runApp(
-      CustomMaterialApp()
-  );
+  await DevicePermissions().askForLocationAndStoragePermissions();
+  runApp(CustomMaterialApp());
+}
+
+class Splash extends StatelessWidget {
+  const Splash({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
 
