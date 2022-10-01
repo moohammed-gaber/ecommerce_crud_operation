@@ -86,7 +86,7 @@ class ProductMapper {
         images: [],
         productColors: (colorsAndSizes['productColors'] as List)
             .map((e) => ProductColor(
-                (e['colorImages'] as List).cast<String>(), e['colorName']))
+                (e['colorImages'] as List).cast<String>(), ProductColorValueObject(e['colorName'])))
             .toList(),
         productSizes: (colorsAndSizes['productSizes'] as List)
             .map((e) => ProductSize(ProductSizeEnum.values

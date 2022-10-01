@@ -20,21 +20,6 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Color(0xFFFEFBF9),
-      appBar: AppBar(
-        leading: const BackButton(color: Colors.black),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: SvgPicture.asset(
-                "assets/icons/Heart.svg",
-                height: 20,
-              ),
-            ),
-          )
-        ],
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -66,33 +51,39 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                       Expanded(
                         child: Text(
                           product.productName.getOrCrash(),
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .headline6,
                         ),
                       ),
                       const SizedBox(width: defaultPadding),
-                      Text(
-                        "\$" +
-                            product.productVariants[0].productPrice
-                                .getOrCrash()
-                                .toString(),
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
+                      GetBuilder<ProductDetailsController>(builder: (logic) {
+                        return Text(
+                          "\$" +
+                              logic.state.selectedVariant.productPrice.
+                                 getOrCrash()
+                                  .toString(),
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .headline6,
+                        );
+                      }),
                     ],
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: defaultPadding),
-                    child: Text(
-                      "A Henley shirt is a collarless pullover shirt, by a round neckline and a placket about 3 to 5 inches (8 to 13 cm) long and usually having 2–5 buttons.",
-                    ),
-                  ),
+                  const SizedBox(height: defaultPadding),
                   Text(
                     "Sizes",
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .subtitle2,
                   ),
                   SizedBox(
                     height: 80,
                     child:
-                        GetBuilder<ProductDetailsController>(builder: (logic) {
+                    GetBuilder<ProductDetailsController>(builder: (logic) {
                       return ListView.builder(
                         itemExtent: 80,
                         scrollDirection: Axis.horizontal,
@@ -103,7 +94,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                           return VariationCard(
                             text: size.value.sign.toString(),
                             isSelected:
-                                controller.state.selectedSizeIndex == index,
+                            controller.state.selectedSizeIndex == index,
                             onTap: () => controller.onSelectSize(index),
                           );
                         },
@@ -113,12 +104,15 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                   const SizedBox(height: defaultPadding / 2),
                   Text(
                     "Colors",
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .subtitle2,
                   ),
                   SizedBox(
                     height: 80,
                     child:
-                        GetBuilder<ProductDetailsController>(builder: (logic) {
+                    GetBuilder<ProductDetailsController>(builder: (logic) {
                       return ListView.builder(
                         itemExtent: 80,
                         scrollDirection: Axis.horizontal,
@@ -126,9 +120,9 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                         itemBuilder: (BuildContext context, int index) {
                           final color = product.productColors[index];
                           return VariationCard(
-                            text: color.color,
-                            isSelected: controller.state.selectedColor == color,
-                            onTap: () => controller.onSelectColor(color),
+                            text: color.color.getOrCrash(),
+                            isSelected: controller.state.selectedColor == index,
+                            onTap: () => controller.onSelectColor(index),
                           );
                         },
                       );
@@ -146,11 +140,10 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
 }
 
 class VariationCard extends StatelessWidget {
-  const VariationCard(
-      {Key? key,
-      required this.text,
-      required this.onTap,
-      required this.isSelected})
+  const VariationCard({Key? key,
+    required this.text,
+    required this.onTap,
+    required this.isSelected})
       : super(key: key);
   final bool isSelected;
   final VoidCallback onTap;
@@ -164,10 +157,11 @@ class VariationCard extends StatelessWidget {
         color: isSelected ? Colors.orange : Colors.white,
         child: Center(
             child: Text(
-          text,
-          style: TextStyle(
-              color: !isSelected ? Colors.orange : Colors.white, fontSize: 20),
-        )),
+              text,
+              style: TextStyle(
+                  color: !isSelected ? Colors.orange : Colors.white,
+                  fontSize: 20),
+            )),
       ),
     );
   }

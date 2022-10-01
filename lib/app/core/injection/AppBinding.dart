@@ -12,6 +12,7 @@ import 'package:ecommerce_crud_operation/app/modules/product/add_product/control
 import 'package:ecommerce_crud_operation/app/modules/product/add_product/controllers/add_size/add_size_state.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/add_product/mappers/add_product_mapper.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/add_product/repos/add_product_repo.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/all_products/controllers/all_products_controller.dart';
 import 'package:ecommerce_crud_operation/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,29 +20,39 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CustomMaterialApp extends StatelessWidget {
-  const CustomMaterialApp({Key? key, required this.appPages}) : super(key: key);
-  final AppPages appPages;
+import '../../modules/product/all_products/controllers/add_product_state.dart';
+
+class AppBinding extends Bindings {
   @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      builder: (context, child) {
-        return SafeArea(
-          child: child!,
-        );
-      },
-      theme: ThemeData(
-        primaryColor: Colors.orange,
-          inputDecorationTheme: InputDecorationTheme(
-              border: InputBorder.none,
-              fillColor: Color(0xfff3f3f4),
-              filled: true),
-          primarySwatch: Colors.blue,
-          textTheme: GoogleFonts.latoTextTheme()),
-      title: "Application",
-      initialRoute: appPages.initialRoute,
-      getPages: appPages.routes,
+  Future<void> dependencies() async {
+    await GetStorage.init();
+    Get.lazyPut<GetStorage>(() => GetStorage());
+    Get.lazyPut<AllProductsController>(
+          () => AllProductsController(
+          AllProductState.initial(), Get.find<ProductRepoImpl>()),
+      fenix: true
     );
+
+    Get.lazyPut<AuthLocalDataSource>(() => AuthLocalDataSourceImpl(Get.find()));
+    final token = Get.find<AuthLocalDataSource>().getToken();
+    final configuredDio = Get.put(ConfiguredDio(token));
+
+    Get.lazyPut<AuthRemoteDataSource>(
+        () => AuthRemoteDataSourceImpl(configuredDio.dio));
+
+    Get.lazyPut<AuthRepo>(() => AuthRepoImpl(Get.find(), Get.find()));
+    Get.lazyPut<AppPages>(() => AppPages(Get.find()));
+
+    Get.lazyPut(() => ProductRepoImpl(configuredDio.dio));
+    Get.lazyPut(() => CustomFilePicker(ImagePicker()));
+    Get.lazyPut(() => AddProductRepo(
+        Get.find<ProductRepoImpl>(), Get.find(), ProductMapper()));
+    Get.lazyPut(() => AddColorController(AddColorState.initial(), Get.find()),
+        fenix: true);
+    Get.lazyPut(
+        () => AddSizeController(
+              AddSizeState.initial(),
+            ),
+        fenix: true);
   }
 }
-

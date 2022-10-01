@@ -10,9 +10,9 @@ class ProductDetailsController extends GetxController
   ProductDetailsController(this.state);
 
   @override
-  void onSelectColor(ProductColor color) {
+  void onSelectColor(int index) {
     state = state.copyWith(
-      selectedColor: color,
+      selectedColorIndex: index,
     );
     update();
     // update(['color']);
