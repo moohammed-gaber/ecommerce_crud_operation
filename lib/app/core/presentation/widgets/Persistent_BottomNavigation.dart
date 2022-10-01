@@ -1,5 +1,5 @@
-import 'package:ecommerce_crud_operation/app/modules/auth/presentation/profile_view.dart';
-import 'package:ecommerce_crud_operation/app/modules/product/all_products/views/all_products_view.dart';
+import 'package:ecommerce_crud_operation/app/features/auth/presentation/profile_view.dart';
+import 'package:ecommerce_crud_operation/app/features/product/presentation/all_products/all_products_view.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'dart:async';
@@ -23,7 +23,6 @@ class PersistentBottomNavigationBar extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: Icon(Icons.home),
         title: ("Home".tr),
-
         activeColorPrimary: Colors.white,
         inactiveColorPrimary: Colors.white,
       ),
@@ -50,13 +49,16 @@ class PersistentBottomNavigationBar extends StatelessWidget {
       screens: _buildScreens(),
       items: _navBarsItems(context),
       confineInSafeArea: true,
-      backgroundColor: an.colorBox(context), // Default is Colors.white.
-      handleAndroidBackButtonPress: true, // Default is true.
-      resizeToAvoidBottomInset:
-          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-      stateManagement: true, // Default is true.
-      hideNavigationBarWhenKeyboardShows:
-          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+      backgroundColor: an.colorBox(context),
+      // Default is Colors.white.
+      handleAndroidBackButtonPress: true,
+      // Default is true.
+      resizeToAvoidBottomInset: true,
+      // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      stateManagement: true,
+      // Default is true.
+      hideNavigationBarWhenKeyboardShows: true,
+      // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.circular(10.0),
         colorBehindNavBar: an.colorBox(context),
@@ -84,10 +86,14 @@ class an {
   //=============== theme Colors App ======
   static colorScaffold(BuildContext context) =>
       Theme.of(context).scaffoldBackgroundColor;
+
   static colorTitle(BuildContext context) => Theme.of(context).canvasColor;
+
   static colorSubTitle(BuildContext context) => Theme.of(context).cardColor;
+
   static colorBox(BuildContext context) => Theme.of(context).backgroundColor;
+
   static colorPrimary(BuildContext context) => Theme.of(context).primaryColor;
 
-  //============= font Size Responsive ===========
+//============= font Size Responsive ===========
 }

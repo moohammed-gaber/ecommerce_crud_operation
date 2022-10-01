@@ -1,4 +1,4 @@
-import 'package:ecommerce_crud_operation/app/routes/app_pages.dart';
+import 'package:ecommerce_crud_operation/app/core/application/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

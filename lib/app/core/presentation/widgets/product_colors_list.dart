@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_color/add_color_state.dart';
+import 'package:ecommerce_crud_operation/app/features/product/application/add_product/add_color/add_color_state.dart';
 import 'package:flutter/material.dart';
 
 class ProductColorList extends StatelessWidget {
@@ -17,14 +17,13 @@ class ProductColorList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 80,
+      height: 100,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: colors.length,
         itemBuilder: (BuildContext context, int index) {
           final size = colors[index];
           return ProductColorCard(
-            isSelected: selectedIndex == index,
             productSize: size,
             onTap: () {
               onTap(index);
@@ -40,14 +39,12 @@ class ProductColorList extends StatelessWidget {
 }
 
 class ProductColorCard extends StatelessWidget {
-  const ProductColorCard(
-      {Key? key,
-      required this.productSize,
-      required this.onTap,
-      required this.isSelected})
-      : super(key: key);
+  const ProductColorCard({
+    Key? key,
+    required this.productSize,
+    required this.onTap,
+  }) : super(key: key);
   final ProductColorInput productSize;
-  final bool isSelected;
   final VoidCallback onTap;
 
   @override
@@ -57,23 +54,28 @@ class ProductColorCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: isSelected ? Colors.black : Colors.grey,
             width: 1,
           ),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Column(
-          children: [
-            Text(productSize.color.getOrCrash()),
-            Image.file(
-              File(
-                productSize.images.first.path,
-              ),
-              height: 50,
-              width: 50,
-            ),
-            // CachedN(productSize.color.images.length.toString()),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Text(productSize.color.getOrCrash(),),
+              SizedBox(height: 10),
+              Wrap(
+                  children: productSize.images
+                      .map((e) => Image.file(
+                            File(
+                              e.path,
+                            ),
+                            height: 50,
+                            width: 50,
+                          ))
+                      .toList())
+            ],
+          ),
         ),
       ),
     );

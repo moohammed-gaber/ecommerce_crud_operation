@@ -1,34 +1,5 @@
 import 'package:flutter/material.dart';
-
-/*
-class ProductSizesList extends StatelessWidget {
-  const ProductSizesList({Key? key, required this.sizes, required this.onTap}) : super(key: key);
-  final List<Size> sizes;
-  final Function(int index) onTap;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 80,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: sizes.length,
-        itemBuilder: (BuildContext context, int index) {
-          final size = sizes[index];
-          return ProductSizeCard(
-            productSize: size,
-            onTap: () {
-              onTap(index);
-            },
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(width: 10);
-        },
-      ),
-    );
-  }
-}
-*/
+import 'package:get/get.dart';
 
 class VariationCard extends StatelessWidget {
   const VariationCard(
@@ -51,12 +22,15 @@ class VariationCard extends StatelessWidget {
         decoration: BoxDecoration(
           // border
           border: Border.all(
-            color: isSelected ? Colors.black : Colors.grey,
+            color: Get.theme.primaryColor,
             width: 1,
           ),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Text(text),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(child: Text(text)),
+        ),
       ),
     );
   }
