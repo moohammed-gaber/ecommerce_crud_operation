@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/value_object.dart';
+import 'package:ecommerce_crud_operation/app/core/domain/value_objects/value_object.dart';
 
 enum ProductSizeEnum {
   small('small', 'S'),
@@ -24,15 +24,13 @@ enum Test implements TestT {
 }
 */
 
-class ProductSize extends ValueObject<String>{
-
+class ProductSize extends ValueObject<String> {
   static Either<ValueFailure<String>, String> validate(String input) {
     return right(input);
 
     if (input.length > 2) {
       return right(input);
     } else {
-
       return left(ValueFailure());
     }
   }

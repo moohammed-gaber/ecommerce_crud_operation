@@ -1,4 +1,4 @@
-import 'package:ecommerce_crud_operation/app/core/widgets/Persistent_BottomNavigation.dart';
+import 'package:ecommerce_crud_operation/app/core/presentation/widgets/Persistent_BottomNavigation.dart';
 import 'package:ecommerce_crud_operation/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +12,7 @@ class HomeView extends GetView<HomeController> {
 
   HomeView({Key? key}) : super(key: key);
   final navigatorKey = GlobalKey<NavigatorState>();
+
   Future<void> onTapBottomNavigationIcon(
       CurrentPage currentPage, String route) async {
     if (this.currentPage == currentPage) return;
@@ -23,14 +24,15 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: PersistentBottomNavigationBar(),
+      bottomNavigationBar: PersistentBottomNavigationBar(),
       /*  body: Navigator(
           initialRoute: Routes.ALL_PRODUCTS,
           onPopPage: (x, y) {
             return true;
           },
           key: navigatorKey,
-        )*/);
+        )*/
+    );
   }
 }
 /*

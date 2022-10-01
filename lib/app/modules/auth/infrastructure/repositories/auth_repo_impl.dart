@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_crud_operation/app/core/failures/exception.dart';
-import 'package:ecommerce_crud_operation/app/core/failures/failure.dart';
+import 'package:ecommerce_crud_operation/app/core/infrastructure/exception/exception.dart';
+import 'package:ecommerce_crud_operation/app/core/domain/failures/failure.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/domain/entities/user.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/domain/failures/failures.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/domain/repository/auth_repo.dart';

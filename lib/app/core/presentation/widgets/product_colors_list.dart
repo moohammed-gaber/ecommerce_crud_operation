@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:ecommerce_crud_operation/app/core/models/product_color_widget_model.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_color/add_color_state.dart';
 import 'package:flutter/material.dart';
 
 class ProductColorList extends StatelessWidget {
@@ -10,7 +10,7 @@ class ProductColorList extends StatelessWidget {
       required this.onTap,
       required this.selectedIndex})
       : super(key: key);
-  final List<ProductColorWidgetModel> colors;
+  final List<ProductColorInput> colors;
   final Function(int index) onTap;
   final int selectedIndex;
 
@@ -46,7 +46,7 @@ class ProductColorCard extends StatelessWidget {
       required this.onTap,
       required this.isSelected})
       : super(key: key);
-  final ProductColorWidgetModel productSize;
+  final ProductColorInput productSize;
   final bool isSelected;
   final VoidCallback onTap;
 
@@ -64,10 +64,10 @@ class ProductColorCard extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(productSize.color.color.getOrCrash()),
+            Text(productSize.color.getOrCrash()),
             Image.file(
               File(
-                productSize.color.images.first.path!,
+                productSize.images.first.path,
               ),
               height: 50,
               width: 50,

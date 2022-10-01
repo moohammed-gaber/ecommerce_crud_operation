@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_color/add_color_state.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_variant.dart';
-import 'package:ecommerce_crud_operation/app/core/models/product_color_widget_model.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_name.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_size.dart';
 import 'package:http_parser/http_parser.dart';
 
 class ProductInput {
-  final List<ProductColorWidgetModel> productColors;
+  final List<ProductColorInput> productColors;
   final List<ProductSize> productSizes;
   final List<ProductVariant> variants;
   final ProductName name;
@@ -20,7 +20,7 @@ class ProductInput {
   Future<Map<String, dynamic>> toJsonFormData() async {
     final productColorsMap = <String, dynamic>{};
     for (int i = 0; i < productColors.length; i++) {
-      final productColor = productColors[i].color;
+      final productColor = productColors[i];
       final color = productColor.color;
       final images = productColor.images;
       productColorsMap.addAll({

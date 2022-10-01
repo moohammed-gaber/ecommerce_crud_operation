@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/value_object.dart';
+import 'package:ecommerce_crud_operation/app/core/domain/value_objects/value_object.dart';
 
 class ProductPrice extends ValueObject<num> {
   static Either<ValueFailure<String>, num> validate(num input) {

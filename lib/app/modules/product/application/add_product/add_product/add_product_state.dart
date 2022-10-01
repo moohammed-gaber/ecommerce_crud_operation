@@ -1,11 +1,11 @@
+import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_color/add_color_state.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_variant.dart';
-import 'package:ecommerce_crud_operation/app/core/models/product_color_widget_model.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_name.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_price.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_size.dart';
 
 class ProductState {
-  final List<ProductColorWidgetModel> productColors;
+  final List<ProductColorInput> productColors;
   final List<ProductSize> productSizes;
   final int selectedColorIndex;
   final int selectedSizeIndex;
@@ -19,7 +19,7 @@ class ProductState {
 
   // copy with
   ProductState copyWith({
-    List<ProductColorWidgetModel>? productColors,
+    List<ProductColorInput>? productColors,
     int? selectedColorIndex,
     List<ProductSize>? productSizes,
     int? selectedSizeIndex,
@@ -38,7 +38,7 @@ class ProductState {
     );
   }
 
-  ProductState addColor(ProductColorWidgetModel productColor) {
+  ProductState addColor(ProductColorInput productColor) {
     return copyWith(
       productColors: [...productColors, productColor],
     );
@@ -57,7 +57,7 @@ class ProductState {
       variants: [
         ...variants,
         ProductVariant(
-            productColor: productColors[selectedColorIndex].color.color,
+            productColor: productColors[selectedColorIndex].color,
             productSize: productSizes[selectedSizeIndex],
             productPrice: price!)
       ],

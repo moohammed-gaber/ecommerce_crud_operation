@@ -1,4 +1,3 @@
-import 'package:ecommerce_crud_operation/app/core/models/product_color_widget_model.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/add_product/repos/add_product_repo.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_color/add_color_state.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_product/add_product_events.dart';
@@ -25,9 +24,7 @@ class AddProductController extends GetxController implements AddProductEvents {
 
   void addColor(ProductColorInput? color) {
     if (color != null) {
-      state = state.addColor(ProductColorWidgetModel(
-        color: color,
-      ));
+      state = state.addColor(color);
       update();
     }
   }
@@ -59,7 +56,7 @@ class AddProductController extends GetxController implements AddProductEvents {
     for (var i = 0; i < colors.length; i++) {
       for (var j = 0; j < sizes.length; j++) {
         variants.add(ProductVariant(
-            productColor: colors[i].color.color,
+            productColor: colors[i].color,
             productSize: sizes[j],
             productPrice: ProductPrice(1)));
       }

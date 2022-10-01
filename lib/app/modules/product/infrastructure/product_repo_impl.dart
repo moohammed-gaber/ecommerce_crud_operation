@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:ecommerce_crud_operation/app/core/failures/failure.dart';
+import 'package:ecommerce_crud_operation/app/core/domain/failures/failure.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/add_product/mappers/add_product_mapper.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/add_product/models/product_input.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_entity.dart';

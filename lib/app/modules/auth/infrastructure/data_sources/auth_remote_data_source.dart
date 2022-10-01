@@ -6,14 +6,16 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:ecommerce_crud_operation/app/core/failures/exception.dart';
-import 'package:ecommerce_crud_operation/app/core/failures/failure.dart';
+import 'package:ecommerce_crud_operation/app/core/infrastructure/exception/exception.dart';
+import 'package:ecommerce_crud_operation/app/core/domain/failures/failure.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/infrastructure/exceptions/exceptions.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/infrastructure/model/user_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<LoggedUserModel> login(String email, String phone);
+
   Future<void> register(String name, String email, String password);
+
   Future<ProfileModel> getProfile();
 }
 
@@ -36,12 +38,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         throw InvalidEmailOrPasswordException();
       }
       throw ServerException();
-    }
-    catch(e){
-
+    } catch (e) {
       throw UnExcepectedException();
     }
-
   }
 
   @override

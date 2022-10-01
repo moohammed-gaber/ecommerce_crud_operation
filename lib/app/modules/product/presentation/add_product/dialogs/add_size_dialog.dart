@@ -1,5 +1,5 @@
 import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_size.dart';
-import 'package:ecommerce_crud_operation/app/core/widgets/product_sizes_list.dart';
+import 'package:ecommerce_crud_operation/app/core/presentation/widgets/product_sizes_list.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_product/add_product_controller.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_size/add_size_controller.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_size/add_size_view_contract.dart';

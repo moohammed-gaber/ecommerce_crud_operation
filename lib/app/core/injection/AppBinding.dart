@@ -1,5 +1,5 @@
-import 'package:ecommerce_crud_operation/app/core/config/dio.dart';
-import 'package:ecommerce_crud_operation/app/core/device/custom_file_picker.dart';
+import 'package:ecommerce_crud_operation/app/core/infrastructure/device/device_file_picker.dart';
+import 'package:ecommerce_crud_operation/app/core/infrastructure/http/dio.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/domain/repository/auth_repo.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/infrastructure/data_sources/auth_local_data_source.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/infrastructure/data_sources/auth_remote_data_source.dart';
@@ -42,7 +42,7 @@ class AppBinding extends Bindings {
     Get.lazyPut<AppPages>(() => AppPages(Get.find()));
 
     Get.lazyPut(() => ProductRepoImpl(configuredDio.dio));
-    Get.lazyPut(() => CustomFilePicker(ImagePicker()));
+    Get.lazyPut(() => DeviceFilePicker(ImagePicker()));
 
     Get.lazyPut(() => AddProductRepo(
         Get.find<ProductRepoImpl>(), Get.find(), ProductMapper()));

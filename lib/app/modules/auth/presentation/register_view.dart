@@ -1,21 +1,15 @@
-import 'package:ecommerce_crud_operation/app/core/config/dio.dart';
+import 'package:ecommerce_crud_operation/app/core/domain/failures/failure.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/application/register/register_view_contract.dart';
-import 'package:ecommerce_crud_operation/app/modules/auth/domain/value_objects/user_full_name.dart';
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart'hide FormData;
-
-import '../application/register/register_controller.dart';
-import 'package:ecommerce_crud_operation/app/core/failures/failure.dart';
-import 'package:ecommerce_crud_operation/app/modules/auth/application/login/login_controller.dart';
-import 'package:ecommerce_crud_operation/app/modules/auth/application/login/login_view_contract.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/domain/failures/failures.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/domain/value_objects/user_email.dart';
+import 'package:ecommerce_crud_operation/app/modules/auth/domain/value_objects/user_full_name.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/domain/value_objects/user_password.dart';
 import 'package:ecommerce_crud_operation/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart' hide FormData;
 import 'package:get/get.dart';
+
+import '../application/register/register_controller.dart';
 
 class RegisterView extends GetView<RegisterController>
     implements RegisterViewContract {
@@ -26,7 +20,9 @@ class RegisterView extends GetView<RegisterController>
   }
 
   final form = GlobalKey<FormState>();
+
   RegisterView({Key? key}) : super(key: key);
+
 /*
   @override
   Widget build(BuildContext context) {

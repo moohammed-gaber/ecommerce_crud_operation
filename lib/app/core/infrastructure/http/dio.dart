@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:ecommerce_crud_operation/app/core/config/constants.dart';
+import 'package:ecommerce_crud_operation/app/core/infrastructure/http/constants.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ConfiguredDio {
@@ -7,7 +7,7 @@ class ConfiguredDio {
   final String? token;
 
   ConfiguredDio(this.token) {
-    dio = Dio(BaseOptions(baseUrl: ConfigConstants.apiPath, headers: {
+    dio = Dio(BaseOptions(baseUrl: HttpConstants.apiPath, headers: {
 /*
       'Content-Type': 'application/json',
       'connection': 'keep-alive',

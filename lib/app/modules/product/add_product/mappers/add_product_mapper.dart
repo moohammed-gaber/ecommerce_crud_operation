@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:ecommerce_crud_operation/app/modules/product/add_product/models/product_input.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_product/add_product_state.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_color.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_entity.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_variant.dart';
@@ -7,8 +9,6 @@ import 'package:ecommerce_crud_operation/app/modules/product/domain/value_object
 import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_name.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_price.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_size.dart';
-import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_product/add_product_state.dart';
-import 'package:ecommerce_crud_operation/app/modules/product/add_product/models/product_input.dart';
 
 class ProductMapper {
   Map<String, dynamic> ProductInputToJson(ProductState input) {
@@ -16,12 +16,12 @@ class ProductMapper {
       'productName': input.name.value,
       'productColors': input.productColors
           .map((e) => {
-                'colorImages': e.color.images
+                'colorImages': e.images
                     .map((e) => File(
-                          e.path!,
+                          e.path,
                         ))
                     .toList(),
-                'colorName': e.color.color.getOrCrash()
+                'colorName': e.color.getOrCrash()
               })
           .toList(),
       'productSizes': input.productSizes.map((e) => e.getOrCrash()).toList(),

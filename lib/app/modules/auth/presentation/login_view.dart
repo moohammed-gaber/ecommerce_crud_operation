@@ -1,4 +1,4 @@
-import 'package:ecommerce_crud_operation/app/core/failures/failure.dart';
+import 'package:ecommerce_crud_operation/app/core/domain/failures/failure.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/application/login/login_controller.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/application/login/login_view_contract.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/domain/failures/failures.dart';
@@ -17,43 +17,45 @@ class LoginView extends GetView<LoginController> implements LoginViewContract {
   }
 
   final form = GlobalKey<FormState>();
+
   LoginView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Form(
-          key: form,
-          child: Stack(
-            children: <Widget>[
-              /* Positioned(
+      key: form,
+      child: Stack(
+        children: <Widget>[
+          /* Positioned(
                   top: -height * .15,
                   right: -MediaQuery.of(context).size.width * .4,
                   child: BezierContainer()),*/
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: height * .2),
-                      _title(),
-                      SizedBox(height: 50),
-                      _emailPasswordWidget(),
-                      SizedBox(height: 20),
-                      _submitButton(),
-                      _divider(),
-                      SizedBox(height: height * .055),
-                      _createAccountLabel(),
-                    ],
-                  ),
-                ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: height * .2),
+                  _title(),
+                  SizedBox(height: 50),
+                  _emailPasswordWidget(),
+                  SizedBox(height: 20),
+                  _submitButton(),
+                  _divider(),
+                  SizedBox(height: height * .055),
+                  _createAccountLabel(),
+                ],
               ),
-              Positioned(top: 40, left: 0, child: _backButton()),
-            ],
+            ),
           ),
-        ));
+          Positioned(top: 40, left: 0, child: _backButton()),
+        ],
+      ),
+    ));
 
     return Scaffold(
         appBar: AppBar(
@@ -132,7 +134,7 @@ class LoginView extends GetView<LoginController> implements LoginViewContract {
 
   Widget _submitButton() {
     return InkWell(
-      onTap: ()=>controller.onTapLoginButton(),
+      onTap: () => controller.onTapLoginButton(),
       child: Container(
         width: Get.width,
         padding: EdgeInsets.symmetric(vertical: 15),
@@ -190,7 +192,6 @@ class LoginView extends GetView<LoginController> implements LoginViewContract {
       ),
     );
   }
-
 
   Widget _createAccountLabel() {
     return InkWell(
@@ -255,26 +256,21 @@ class LoginView extends GetView<LoginController> implements LoginViewContract {
 */
         TextFormField(
           decoration: InputDecoration(
-
             hintText: 'Email',
-
           ),
           validator: (_) => UserEmail(_!)
               .value
               .fold((l) => 'Invalid email address', (r) => null),
           onChanged: (_) => controller.onChangeEmailTextField(UserEmail(_)),
         ),
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
         TextFormField(
           obscureText: true,
           decoration: InputDecoration(
-
             hintText: 'Password',
-
-
           ),
-
-
           validator: (_) => UserPassword(_!)
               .value
               .fold((l) => 'Invalid password', (r) => null),

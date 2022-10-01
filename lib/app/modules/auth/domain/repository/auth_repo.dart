@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_crud_operation/app/core/failures/failure.dart';
+import 'package:ecommerce_crud_operation/app/core/domain/failures/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_crud_operation/app/core/failures/failure.dart';
+import 'package:ecommerce_crud_operation/app/core/domain/failures/failure.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/domain/entities/user.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/domain/repository/auth_repo.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/domain/value_objects/user_email.dart';
@@ -14,8 +14,11 @@ import 'package:ecommerce_crud_operation/app/modules/auth/infrastructure/data_so
 abstract class AuthRepo {
   Future<Either<Failure, LoggedUser>> login(
       UserEmail email, UserPassword password);
+
   Future<Either<Failure, Unit>> register(
       UserFullName name, UserPassword password, UserEmail email);
+
   Future<Either<Failure, Profile>> getMyProfile();
+
   UserToken? getSavedToken();
 }

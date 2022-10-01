@@ -1,4 +1,4 @@
-import 'package:ecommerce_crud_operation/app/core/config/dio.dart';
+import 'package:ecommerce_crud_operation/app/core/infrastructure/http/dio.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/application/login/login_events.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/application/login/login_state.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/application/login/login_view_contract.dart';

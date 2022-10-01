@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_crud_operation/app/core/device/custom_file_picker.dart';
-import 'package:ecommerce_crud_operation/app/core/failures/failure.dart';
+import 'package:ecommerce_crud_operation/app/core/domain/failures/failure.dart';
+import 'package:ecommerce_crud_operation/app/core/infrastructure/device/device_file_picker.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/add_product/mappers/add_product_mapper.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_product/add_product_state.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_entity.dart';
@@ -10,7 +10,7 @@ import 'package:ecommerce_crud_operation/app/modules/product/domain/repository/p
 import 'package:get/get.dart';
 
 class AddProductRepo extends GetxService {
-  final CustomFilePicker filePicker;
+  final DeviceFilePicker filePicker;
   final ProductRepo productRepo;
   final ProductMapper mapper;
 

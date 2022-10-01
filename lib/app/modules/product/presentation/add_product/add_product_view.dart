@@ -1,7 +1,7 @@
 import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_name.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_price.dart';
-import 'package:ecommerce_crud_operation/app/core/widgets/product_colors_list.dart';
-import 'package:ecommerce_crud_operation/app/core/widgets/product_sizes_list.dart';
+import 'package:ecommerce_crud_operation/app/core/presentation/widgets/product_colors_list.dart';
+import 'package:ecommerce_crud_operation/app/core/presentation/widgets/product_sizes_list.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/presentation/add_product/dialogs/add_color_dialog.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/presentation/add_product/dialogs/add_size_dialog.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_product/add_product_controller.dart';
