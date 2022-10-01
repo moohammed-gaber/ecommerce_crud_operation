@@ -23,14 +23,20 @@ class PersistentBottomNavigationBar extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: Icon(Icons.home),
         title: ("Home".tr),
-        activeColorPrimary: an.colorPrimary(context),
-        inactiveColorPrimary: an.colorSubTitle(context),
+
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: Colors.white,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.account_circle_outlined),
         title: ("Profile".tr),
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: Colors.white,
+
+/*
         activeColorPrimary: an.colorPrimary(context),
         inactiveColorPrimary: an.colorSubTitle(context),
+*/
       ),
     ];
   }
@@ -39,6 +45,7 @@ class PersistentBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
+
       controller: _controller,
       screens: _buildScreens(),
       items: _navBarsItems(context),

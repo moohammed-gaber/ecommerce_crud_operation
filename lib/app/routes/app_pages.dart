@@ -1,8 +1,7 @@
 import 'package:ecommerce_crud_operation/app/modules/auth/application/login/login_binding.dart';
-import 'package:ecommerce_crud_operation/app/modules/auth/domain/repository/auth_repo.dart';
-import 'package:ecommerce_crud_operation/app/modules/auth/infrastructure/data_sources/auth_local_data_source.dart';
-import 'package:ecommerce_crud_operation/app/modules/auth/presentation/login_view.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/application/register/register_binding.dart';
+import 'package:ecommerce_crud_operation/app/modules/auth/domain/repository/auth_repo.dart';
+import 'package:ecommerce_crud_operation/app/modules/auth/presentation/login_view.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/presentation/register_view.dart';
 import 'package:get/get.dart';
 
@@ -10,17 +9,17 @@ import '../modules/auth/application/profile/profile_binding.dart';
 import '../modules/auth/presentation/profile_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/product//add_product/bindings/add_product_binding.dart';
-import '../modules/product/add_product/views/add_product_view.dart';
-import '../modules/product/all_products/bindings/all_products_binding.dart';
+import '../modules/product/presentation/add_product/add_product_view.dart';
+import '../modules/product/application/all_products/all_products_binding.dart';
 import '../modules/product/all_products/views/all_products_view.dart';
-import '../modules/product/product_details/bindings/product_details_binding.dart';
-import '../modules/product/product_details/views/product_details_view.dart';
+import '../modules/product/application/product_details/product_details_binding.dart';
+import '../modules/product/presentation/product_details/product_details_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages(this.repo);
+
   final AuthRepo repo;
 
   String get initialRoute =>
@@ -35,7 +34,6 @@ class AppPages {
     GetPage(
       name: _Paths.ADD_PRODUCT,
       page: () => AddProductView(),
-      binding: AddProductBinding(),
     ),
     GetPage(
       name: _Paths.PRODUCT_DETAILS,

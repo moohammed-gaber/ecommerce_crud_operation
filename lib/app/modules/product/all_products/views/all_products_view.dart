@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ecommerce_crud_operation/app/core/entities/product_entity.dart';
-import 'package:ecommerce_crud_operation/app/modules/product/all_products/controllers/add_product_state.dart';
-import 'package:ecommerce_crud_operation/app/modules/product/all_products/controllers/all_product_view_contract.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_entity.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/application/all_products/all_product_state.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/application/all_products/all_product_view_contract.dart';
 import 'package:ecommerce_crud_operation/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/all_products_controller.dart';
+import '../../application/all_products/all_products_controller.dart';
 
 class AllProductsView extends GetView<AllProductsController>
     implements AllProductViewContract {
@@ -27,10 +28,14 @@ class AllProductsView extends GetView<AllProductsController>
 */
     return Scaffold(
         floatingActionButton: FloatingActionButton(
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
           onPressed: navigateToAddProduct,
         ),
         appBar: AppBar(
-          title: const Text('AllProductsView'),
+          title: const Text('HOME'),
           centerTitle: true,
         ),
         body: GetBuilder<AllProductsController>(builder: (logic) {
@@ -48,6 +53,7 @@ class AllProductsView extends GetView<AllProductsController>
           if (state is AllProductsDataLoadingSuccess) {
             final products = state.products;
             return GridView.builder(
+              padding: const EdgeInsets.only(bottom: 80),
               itemCount: products.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -59,14 +65,76 @@ class AllProductsView extends GetView<AllProductsController>
                   onTap: () =>
                       Get.toNamed(Routes.PRODUCT_DETAILS, arguments: product),
                   child: Card(
-                    color: Colors.red,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        CarouselSlider(
+                          options: CarouselOptions(
+                              enableInfiniteScroll: false,
+                              height: 200.0,
+                              viewportFraction: 1),
+                          items: product.productColors[0].images.map((i) {
+                            return CachedNetworkImage(
+                              imageUrl: i,
+                              fit: BoxFit.contain,
+                              height: 20,
+                            );
+                          }).toList(),
+                        ),
+/*
                         CachedNetworkImage(
                           imageUrl: product.productColors[0].images[0],
                           fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: 200,
                         ),
-                        Text(product.productName.getOrCrash()),
+*/
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(product.productName.getOrCrash(),
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold)),
+                        ),
+                        SizedBox(
+                          height: 30,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: product.productSizes.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final e = product.productSizes[index];
+                              return Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 2, horizontal: 4),
+                                    child: Center(
+                                      child: Text(e.getOrCrash(),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                          )),
+                                    ),
+                                  ));
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return const SizedBox(
+                                width: 5,
+                              );
+                            },
+                          ),
+                        ),
+/*
+                        ...product.productSizes
+                            .map((e) => Container(
+                            color: Colors.grey,
+                            child: Text(e.getOrCrash(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                    ))))
+                            .toList(),
+*/
                       ],
                     ),
                   ),

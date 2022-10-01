@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:ecommerce_crud_operation/app/core/entities/product_color.dart';
-import 'package:ecommerce_crud_operation/app/core/entities/product_entity.dart';
-import 'package:ecommerce_crud_operation/app/core/entities/product_variant.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/product_color.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/product_name.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/product_price.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/product_size.dart';
-import 'package:ecommerce_crud_operation/app/modules/product/add_product/controllers/add_product/add_product_state.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_color.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_entity.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_variant.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_color.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_name.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_price.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_size.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/application/add_product/add_product/add_product_state.dart';
 import 'package:ecommerce_crud_operation/app/modules/product/add_product/models/product_input.dart';
 
 class ProductMapper {
@@ -24,12 +24,12 @@ class ProductMapper {
                 'colorName': e.color.color.getOrCrash()
               })
           .toList(),
-      'productSizes': input.productSizes.map((e) => e.value.value).toList(),
+      'productSizes': input.productSizes.map((e) => e.getOrCrash()).toList(),
       'productVariations': input.variants
           .map((e) => {
                 'variantPrice': e.productPrice.getOrCrash(),
                 'variantAttributes': {
-                  'variantSize': e.productSize.value.value,
+                  'variantSize': e.productSize.getOrCrash(),
                   'variantColor': {'colorName': e.productColor.getOrCrash()},
                 },
               })
@@ -58,8 +58,7 @@ class ProductMapper {
       }
       ProductSize? size;
       try {
-        size = ProductSize(ProductSizeEnum.values
-            .byName((colorAndSize['variantSize'] as String).toLowerCase()));
+        size = ProductSize(colorAndSize['variantSize'] as String);
       } catch (e) {
         print(e);
         return null;
@@ -85,12 +84,11 @@ class ProductMapper {
         productVariants: variants,
         images: [],
         productColors: (colorsAndSizes['productColors'] as List)
-            .map((e) => ProductColor(
-                (e['colorImages'] as List).cast<String>(), ProductColorValueObject(e['colorName'])))
+            .map((e) => ProductColor((e['colorImages'] as List).cast<String>(),
+                ProductColorValueObject(e['colorName'])))
             .toList(),
         productSizes: (colorsAndSizes['productSizes'] as List)
-            .map((e) => ProductSize(ProductSizeEnum.values
-                .byName((e as String).isEmpty ? 'small' : e)))
+            .map((e) => ProductSize(e))
             .toList());
   }
 }

@@ -1,4 +1,4 @@
-import 'package:ecommerce_crud_operation/app/core/entities/product_entity.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_entity.dart';
 import 'package:ecommerce_crud_operation/app/modules/auth/domain/entities/user.dart';
 
 class ProfileState {

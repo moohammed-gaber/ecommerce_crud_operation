@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:ecommerce_crud_operation/app/core/entities/product_variant.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/domain/entities/product_variant.dart';
 import 'package:ecommerce_crud_operation/app/core/models/product_color_widget_model.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/product_name.dart';
-import 'package:ecommerce_crud_operation/app/core/value_objects/product_size.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_name.dart';
+import 'package:ecommerce_crud_operation/app/modules/product/domain/value_objects/product_size.dart';
 import 'package:http_parser/http_parser.dart';
 
 class ProductInput {
@@ -36,7 +36,7 @@ class ProductInput {
 
     for (int i = 0; i < productSizes.length; i++) {
       productSizesMap.addAll({
-        'productSizes[$i]': productSizes[i].value.value,
+        'productSizes[$i]': productSizes[i].getOrCrash(),
       });
     }
     final productVariationMap = <String, dynamic>{};
@@ -46,7 +46,7 @@ class ProductInput {
         'productVariations[$i][variantPrice]':
             variant.productPrice.getOrCrash(),
         'productVariations[$i][variantAttributes][variantSize]':
-            variant.productSize.value.value,
+            variant.productSize.getOrCrash(),
         'productVariations[$i][variantAttributes][variantColor][colorName]':
             variant.productColor.getOrCrash(),
       });

@@ -8,7 +8,7 @@ abstract class ValueObject<T> {
   /// Throws [UnexpectedValueError] containing the [ValueFailure]
   T getOrCrash() {
     // id = identity - same as writing (right) => right
-    return value.fold((f) => throw Exception(), id);
+    return value.fold((f) => throw f, id);
   }
 
   Either<ValueFailure<dynamic>, Unit> get failureOrUnit {
@@ -34,4 +34,9 @@ abstract class ValueObject<T> {
   String toString() => 'Value($value)';
 }
 
-class ValueFailure<T> {}
+class ValueFailure<T> {
+  final T ?input;
+
+  ValueFailure([this.input]);
+
+}
