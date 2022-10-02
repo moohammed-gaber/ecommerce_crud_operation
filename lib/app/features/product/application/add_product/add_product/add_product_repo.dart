@@ -20,7 +20,7 @@ class AddProductRepo extends GetxService {
     return filePicker.pickMultiImage();
   }
 
-  Future<Either<Failure, Product>> add(ProductState state) async {
+  Future<Either<Failure, Unit>> add(ProductState state) async {
     return productRepo.add(mapper.productInputFromState(state));
   }
 }

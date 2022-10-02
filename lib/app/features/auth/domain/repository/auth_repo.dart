@@ -21,4 +21,6 @@ abstract class AuthRepo {
   Future<Either<Failure, Profile>> getMyProfile();
 
   UserToken? getSavedToken();
+
+  Future<Either<Failure, Unit>> logout();
 }

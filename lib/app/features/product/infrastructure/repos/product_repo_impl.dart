@@ -12,7 +12,7 @@ class ProductRepoImpl implements ProductRepo {
   final Dio _dio;
 
   @override
-  Future<Either<Failure, Product>> add(ProductInput product) async {
+  Future<Either<Failure, Unit>> add(ProductInput product) async {
     try {
       final body = await product.toJsonFormData();
       final mapper = ProductMapper();
@@ -25,7 +25,7 @@ class ProductRepoImpl implements ProductRepo {
           ),
           data: FormData.fromMap(body));
 
-      return right((result.data)!);
+      return right(unit);
     } catch (e) {
       rethrow;
       return left(Failure());
@@ -54,9 +54,13 @@ class ProductRepoImpl implements ProductRepo {
         print('products: ${products.length}');
       }
       return right(products.reversed.toList());
+    } on DioError catch (e) {
+      if(e.response?.statusCode==400) {
+        return right([]);
+      }
+      return left(ServerFailure());
     } catch (e) {
-      rethrow;
-      return left(Failure());
+      return left(UnExpectedFailure());
     }
   }
 

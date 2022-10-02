@@ -8,5 +8,5 @@ abstract class ProductRepo {
 
   Future<Either<Failure, Product>> getById(String id);
 
-  Future<Either<Failure, Product>> add(ProductInput product);
+  Future<Either<Failure, Unit>> add(ProductInput product);
 }

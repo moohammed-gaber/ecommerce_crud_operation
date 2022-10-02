@@ -47,40 +47,45 @@ class AllProductsView extends GetView<AllProductsController>
           }
           if (state is AllProductsDataFailure) {
             return Center(
-              child: Text('Something went wrong'),
+              child: OutlinedButton(
+                onPressed: ()=>controller.getAllProducts(),
+                child: Text('Something went wrong click to retry'),
+              ),
             );
           }
           if (state is AllProductsDataLoadingSuccess) {
             final products = state.products;
-            return GridView.builder(
-              padding: const EdgeInsets.only(bottom: 80),
-              itemCount: products.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: MediaQuery.of(context).size.width /
-                      (MediaQuery.of(context).size.height / 1.3)),
-              itemBuilder: (BuildContext context, int index) {
-                final product = products[index];
-                return InkWell(
-                  onTap: () =>
-                      Get.toNamed(Routes.PRODUCT_DETAILS, arguments: product),
-                  child: Card(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CarouselSlider(
-                          options: CarouselOptions(
-                              enableInfiniteScroll: false,
-                              height: 200.0,
-                              viewportFraction: 1),
-                          items: product.productColors[0].images.map((i) {
-                            return CachedNetworkImage(
-                              imageUrl: i,
-                              fit: BoxFit.contain,
-                              height: 20,
-                            );
-                          }).toList(),
-                        ),
+            return products.isEmpty
+                ? Center(child: Text('Products are empty now.'))
+                : GridView.builder(
+                    padding: const EdgeInsets.only(bottom: 80),
+                    itemCount: products.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: MediaQuery.of(context).size.width /
+                            (MediaQuery.of(context).size.height / 1.3)),
+                    itemBuilder: (BuildContext context, int index) {
+                      final product = products[index];
+                      return InkWell(
+                        onTap: () => Get.toNamed(Routes.PRODUCT_DETAILS,
+                            arguments: product),
+                        child: Card(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CarouselSlider(
+                                options: CarouselOptions(
+                                    enableInfiniteScroll: false,
+                                    height: 200.0,
+                                    viewportFraction: 1),
+                                items: product.productColors[0].images.map((i) {
+                                  return CachedNetworkImage(
+                                    imageUrl: i,
+                                    fit: BoxFit.contain,
+                                    height: 20,
+                                  );
+                                }).toList(),
+                              ),
 /*
                         CachedNetworkImage(
                           imageUrl: product.productColors[0].images[0],
@@ -89,42 +94,45 @@ class AllProductsView extends GetView<AllProductsController>
                           height: 200,
                         ),
 */
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(product.productName.getOrCrash(),
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold)),
-                        ),
-                        SizedBox(
-                          height: 30,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: product.productSizes.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final e = product.productSizes[index];
-                              return Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey,
-                                      borderRadius: BorderRadius.circular(5)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 2, horizontal: 4),
-                                    child: Center(
-                                      child: Text(e.getOrCrash(),
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                          )),
-                                    ),
-                                  ));
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) {
-                              return const SizedBox(
-                                width: 5,
-                              );
-                            },
-                          ),
-                        ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(product.productName.getOrCrash(),
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                              SizedBox(
+                                height: 30,
+                                child: ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: product.productSizes.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    final e = product.productSizes[index];
+                                    return Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 2, horizontal: 4),
+                                          child: Center(
+                                            child: Text(e.getOrCrash(),
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                )),
+                                          ),
+                                        ));
+                                  },
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return const SizedBox(
+                                      width: 5,
+                                    );
+                                  },
+                                ),
+                              ),
 /*
                         ...product.productSizes
                             .map((e) => Container(
@@ -135,12 +143,12 @@ class AllProductsView extends GetView<AllProductsController>
                                     ))))
                             .toList(),
 */
-                      ],
-                    ),
-                  ),
-                );
-              },
-            );
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
           }
           return SizedBox();
         }));

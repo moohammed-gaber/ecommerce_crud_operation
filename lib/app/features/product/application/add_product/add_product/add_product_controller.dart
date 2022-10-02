@@ -81,7 +81,7 @@ class AddProductController extends GetxController implements AddProductEvents {
     final result = await repo.add(state);
     result.fold((l) {
       viewContract.onAddProductFailed();
-    }, (r) => null);
+    }, (r) => viewContract.onAddProductSuccess());
   }
 
   @override

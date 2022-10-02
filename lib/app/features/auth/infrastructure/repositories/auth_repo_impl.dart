@@ -52,7 +52,6 @@ class AuthRepoImpl implements AuthRepo {
     } on ServerException {
       return left(ServerFailure());
     } catch (e) {
-      rethrow;
       return left(UnExpectedFailure());
     }
   }
@@ -62,8 +61,10 @@ class AuthRepoImpl implements AuthRepo {
     try {
       final result = await remoteDataSource.getProfile();
       return right(result.toDomain());
+    } on ServerException {
+      return left(ServerFailure());
     } catch (e) {
-      return left(Failure());
+      return left(UnExpectedFailure());
     }
   }
 
@@ -71,5 +72,15 @@ class AuthRepoImpl implements AuthRepo {
   UserToken? getSavedToken() {
     final token = localDataSource.getToken();
     return token == null ? null : UserToken(token);
+  }
+
+  @override
+  Future<Either<Failure, Unit>> logout() async {
+    try {
+      await localDataSource.deleteToken();
+      return right(unit);
+    } catch (e) {
+      return left(UnExpectedFailure());
+    }
   }
 }

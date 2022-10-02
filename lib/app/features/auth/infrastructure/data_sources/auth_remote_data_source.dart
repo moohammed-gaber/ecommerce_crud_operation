@@ -61,9 +61,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<ProfileModel> getProfile() async {
-    final dioResult = await dio.post(
-      '/Name',
-    );
-    return ProfileModel.fromJson(dioResult.data);
+    try {
+      final dioResult = await dio.get(
+        '/get-user-info',
+      );
+      return ProfileModel.fromJson(dioResult.data);
+    } on DioError catch (e) {
+      throw ServerException();
+    } catch (e) {
+      throw UnExcepectedException();
+    }
   }
 }

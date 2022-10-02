@@ -28,10 +28,6 @@ class LoginView extends GetView<LoginController> implements LoginViewContract {
       key: form,
       child: Stack(
         children: <Widget>[
-          /* Positioned(
-                  top: -height * .15,
-                  right: -MediaQuery.of(context).size.width * .4,
-                  child: BezierContainer()),*/
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
@@ -52,60 +48,9 @@ class LoginView extends GetView<LoginController> implements LoginViewContract {
               ),
             ),
           ),
-          Positioned(top: 40, left: 0, child: _backButton()),
         ],
       ),
     ));
-
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('LoginView'),
-          centerTitle: true,
-        ),
-        body: SingleChildScrollView(
-          child: Form(
-              key: form,
-              child: Column(children: [
-                TextFormField(
-                  validator: (_) => UserEmail(_!)
-                      .value
-                      .fold((l) => 'Invalid email address', (r) => null),
-                  onChanged: (_) =>
-                      controller.onChangeEmailTextField(UserEmail(_)),
-                ),
-                TextFormField(
-                  validator: (_) => UserPassword(_!)
-                      .value
-                      .fold((l) => 'Invalid password', (r) => null),
-                  onChanged: (_) =>
-                      controller.onChangePasswordTextField(UserPassword(_)),
-                ),
-                ElevatedButton(
-                    onPressed: controller.onTapLoginButton,
-                    child: const Text('Login'))
-              ])),
-        ));
-  }
-
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Get.back();
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
-            ),
-            Text('Back',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
-          ],
-        ),
-      ),
-    );
   }
 
   Widget _entryField(String title, {bool isPassword = false}) {

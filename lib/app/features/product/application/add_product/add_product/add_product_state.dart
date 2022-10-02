@@ -10,11 +10,12 @@ class ProductState {
   final int selectedColorIndex;
   final int selectedSizeIndex;
   List<ProductVariant> variants;
+  final bool isLoading;
   ProductPrice? price;
   final ProductName name;
 
   ProductState(this.productColors, this.selectedColorIndex, this.productSizes,
-      this.selectedSizeIndex, this.variants, this.name,
+      this.selectedSizeIndex, this.variants, this.name, this.isLoading,
       {this.price});
 
   // copy with
@@ -26,6 +27,7 @@ class ProductState {
     ProductPrice? price,
     List<ProductVariant>? variants,
     ProductName? name,
+    bool? isLoading,
   }) {
     return ProductState(
       productColors ?? this.productColors,
@@ -34,6 +36,7 @@ class ProductState {
       selectedSizeIndex ?? this.selectedSizeIndex,
       variants ?? this.variants,
       name ?? this.name,
+      isLoading ?? this.isLoading,
       price: price ?? this.price,
     );
   }
@@ -69,8 +72,7 @@ class ProductState {
       productSizes: [...productSizes, productSize],
     );
   }
-
   factory ProductState.initial() {
-    return ProductState([], -1, [], -1, [], ProductName(''));
+    return ProductState([], -1, [], -1, [], ProductName(''), false);
   }
 }
