@@ -14,6 +14,12 @@ class UserEmail extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
+ /* factory UserEmail.parse(String input) {
+    return UserEmail._(
+        ,
+    );
+  }*/
+
   factory UserEmail(String input) {
     return UserEmail._(
       validate(input),

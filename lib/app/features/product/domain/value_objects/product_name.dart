@@ -3,9 +3,8 @@ import 'package:ecommerce_crud_operation/app/core/domain/value_objects/value_obj
 
 class ProductName extends ValueObject<String> {
   static Either<ValueFailure<String>, String> validate(String input) {
-    return right(input);
 
-    if (input.length > 0) {
+    if (input.isNotEmpty) {
       return right(input);
     } else {
       return left(ValueFailure());

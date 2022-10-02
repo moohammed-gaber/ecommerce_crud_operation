@@ -16,11 +16,6 @@ class AddProductController extends GetxController implements AddProductEvents {
 
   AddProductController(this.state, this.repo);
 
-  @override
-  void onSelectColor(int index) {
-    state = state.copyWith(selectedColorIndex: index);
-    update();
-  }
 
   void addColor(ProductColorInput? color) {
     if (color != null) {
@@ -37,7 +32,7 @@ class AddProductController extends GetxController implements AddProductEvents {
   }
 
   @override
-  Future<void> onTapSize(int index) async {
+  Future<void> onTapSizeCard(int index) async {
     final price = await viewContract.showVariantPriceBottomSheet();
     final selectedSize = state.productSizes[index];
 
@@ -55,7 +50,7 @@ class AddProductController extends GetxController implements AddProductEvents {
   }
 
   @override
-  void onAddVariation() {
+  void onTapGenerateVariationButton() {
     state = state.reset();
     final colors = state.productColors;
     final sizes = state.productSizes;
@@ -73,12 +68,12 @@ class AddProductController extends GetxController implements AddProductEvents {
   }
 
   @override
-  void onNameChanged(ProductName name) {
+  void onNameTextFieldChanged(ProductName name) {
     state = state.copyWith(name: name);
   }
 
   @override
-  Future<void> onAddProduct() async {
+  Future<void> onTapAddProductButton() async {
     final result = await repo.add(state);
     result.fold((l) {
       viewContract.onAddProductFailed();

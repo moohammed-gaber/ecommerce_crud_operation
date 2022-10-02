@@ -3,7 +3,7 @@ import 'package:ecommerce_crud_operation/app/core/domain/value_objects/value_obj
 
 class ProductColorValueObject extends ValueObject<String> {
   static Either<ValueFailure<String>, String> validate(String input) {
-    if (input.length > 2) {
+    if (input.isNotEmpty) {
       return right(input);
     } else {
       return left(ValueFailure());

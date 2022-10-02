@@ -2,17 +2,15 @@ import 'package:ecommerce_crud_operation/app/features/product/domain/value_objec
 import 'package:ecommerce_crud_operation/app/features/product/domain/value_objects/product_price.dart';
 
 abstract class AddProductEvents {
-  void onSelectColor(int index);
 
-  void onTapSize(int index);
+  void onTapSizeCard(int index);
 
-  void onPriceChanged(ProductPrice price);
 
-  void onNameChanged(ProductName name);
+  void onNameTextFieldChanged(ProductName name);
 
-  void onAddVariation();
+  void onTapGenerateVariationButton();
 
-  void onAddProduct();
+  void onTapAddProductButton();
 
   void onTapVariantCard(int index);
 }

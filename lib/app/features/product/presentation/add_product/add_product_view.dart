@@ -35,7 +35,7 @@ class AddProductView extends GetView<AddProductController>
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            controller.onAddProduct();
+            controller.onTapAddProductButton();
           },
           child: const Icon(Icons.add, color: Colors.white),
         ),
@@ -55,7 +55,7 @@ class AddProductView extends GetView<AddProductController>
                   ),
                   keyboardType: TextInputType.text,
                   controller: nameController,
-                  onChanged: (x) => controller.onNameChanged(ProductName((x))),
+                  onChanged: (x) => controller.onNameTextFieldChanged(ProductName((x))),
                 ),
                 OutlinedButton(
                     onPressed: () {
@@ -66,7 +66,7 @@ class AddProductView extends GetView<AddProductController>
                   return ProductColorList(
                     selectedIndex: controller.state.selectedColorIndex,
                     colors: controller.state.productColors.toList(),
-                    onTap: controller.onSelectColor,
+                    onTap: (x){},
                   );
                 }),
                 OutlinedButton(
@@ -89,7 +89,7 @@ class AddProductView extends GetView<AddProductController>
                           return VariationCard(
                             text: size.getOrCrash(),
                             onTap: () {
-                              controller.onTapSize(index);
+                              controller.onTapSizeCard(index);
                             },
                             isSelected: state.selectedSizeIndex == index,
                           );
@@ -103,7 +103,7 @@ class AddProductView extends GetView<AddProductController>
                 ),
                 OutlinedButton(
                     onPressed: () async {
-                      controller.onAddVariation();
+                      controller.onTapGenerateVariationButton();
                     },
                     child: Text('Generate Variation')),
                 SizedBox(
