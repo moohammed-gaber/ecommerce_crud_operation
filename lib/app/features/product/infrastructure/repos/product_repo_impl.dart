@@ -27,7 +27,6 @@ class ProductRepoImpl implements ProductRepo {
 
       return right(unit);
     } catch (e) {
-      rethrow;
       return left(Failure());
     }
   }
@@ -55,7 +54,7 @@ class ProductRepoImpl implements ProductRepo {
       }
       return right(products.reversed.toList());
     } on DioError catch (e) {
-      if(e.response?.statusCode==400) {
+      if (e.response?.statusCode == 400) {
         return right([]);
       }
       return left(ServerFailure());

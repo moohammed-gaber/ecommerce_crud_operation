@@ -155,10 +155,11 @@ class AddProductView extends GetView<AddProductController>
 
   @override
   onAddProductSuccess() {
+    Get.snackbar('Success', 'Product added successfully');
+  }
 /*
     Get.back();
 */
-  }
 
   @override
   Future<ProductPrice?> showVariantPriceBottomSheet() async {
@@ -166,9 +167,7 @@ class AddProductView extends GetView<AddProductController>
   }
 
   @override
-  void unFocusVariationPrice() {
-    // TODO: implement unFocusVariationPrice
-  }
+  void unFocusVariationPrice() {}
 }
 
 class VariationPriceBottomSheet extends StatelessWidget {

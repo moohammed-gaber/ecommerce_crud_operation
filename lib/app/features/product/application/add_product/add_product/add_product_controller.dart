@@ -62,12 +62,6 @@ class AddProductController extends GetxController implements AddProductEvents {
       }
     }
     state = state.copyWith(variants: variants);
-/*
-
-    state = state.addVariant();
-    state = state.reset();
-    viewContract.onSuccessAddVariation();
-*/
     update();
   }
 
@@ -81,7 +75,9 @@ class AddProductController extends GetxController implements AddProductEvents {
     final result = await repo.add(state);
     result.fold((l) {
       viewContract.onAddProductFailed();
-    }, (r) => viewContract.onAddProductSuccess());
+    }, (r) {
+      viewContract.onAddProductSuccess();
+    });
   }
 
   @override
