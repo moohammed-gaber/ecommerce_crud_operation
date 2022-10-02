@@ -6,7 +6,5 @@ import 'package:ecommerce_crud_operation/app/features/product/domain/entities/pr
 abstract class ProductRepo {
   Future<Either<Failure, List<Product>>> getAll();
 
-  Future<Either<Failure, Product>> getById(String id);
-
   Future<Either<Failure, Unit>> add(ProductInput product);
 }

@@ -11,32 +11,6 @@ import 'package:ecommerce_crud_operation/app/features/product/domain/value_objec
 import 'package:ecommerce_crud_operation/app/features/product/domain/value_objects/product_size.dart';
 
 class ProductMapper {
-  Map<String, dynamic> ProductInputToJson(ProductState input) {
-    return {
-      'productName': input.name.value,
-      'productColors': input.productColors
-          .map((e) => {
-                'colorImages': e.images
-                    .map((e) => File(
-                          e.path,
-                        ))
-                    .toList(),
-                'colorName': e.color.getOrCrash()
-              })
-          .toList(),
-      'productSizes': input.productSizes.map((e) => e.getOrCrash()).toList(),
-      'productVariations': input.variants
-          .map((e) => {
-                'variantPrice': e.productPrice.getOrCrash(),
-                'variantAttributes': {
-                  'variantSize': e.productSize.getOrCrash(),
-                  'variantColor': {'colorName': e.productColor.getOrCrash()},
-                },
-              })
-          .toList(),
-    };
-  }
-
   ProductInput productInputFromState(ProductState state) {
     return ProductInput(
         productColors: state.productColors,
@@ -49,7 +23,6 @@ class ProductMapper {
     final colorsAndSizes = json['productOptions'];
     final variantsJson = (json['productVariants'] as List);
     final variants = <ProductVariant>[];
-
     for (var i = 0; i < variantsJson.length; i++) {
       final e = variantsJson[i];
       final colorAndSize = e['variantAttributes'];
@@ -60,14 +33,12 @@ class ProductMapper {
       try {
         size = ProductSize(colorAndSize['variantSize'] as String);
       } catch (e) {
-        print(e);
         return null;
       }
       late ProductPrice variantPrice;
 
       final parsedPrice = num.tryParse(e['variantPrice']);
       if (parsedPrice == null) {
-        print('parsedPrice is $e');
         return null;
       }
       variantPrice = ProductPrice(parsedPrice);
@@ -82,7 +53,6 @@ class ProductMapper {
         productName: ProductName(json['productName']),
         id: json['_id'],
         productVariants: variants,
-        images: [],
         productColors: (colorsAndSizes['productColors'] as List)
             .map((e) => ProductColor((e['colorImages'] as List).cast<String>(),
                 ProductColorValueObject(e['colorName'])))

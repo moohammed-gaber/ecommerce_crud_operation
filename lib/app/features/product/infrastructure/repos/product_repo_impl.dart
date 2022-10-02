@@ -15,8 +15,6 @@ class ProductRepoImpl implements ProductRepo {
   Future<Either<Failure, Unit>> add(ProductInput product) async {
     try {
       final body = await product.toJsonFormData();
-      final mapper = ProductMapper();
-
       final result = await _dio.post('/add-product',
           options: Options(
             headers: {
@@ -27,7 +25,7 @@ class ProductRepoImpl implements ProductRepo {
 
       return right(unit);
     } catch (e) {
-      return left(Failure());
+      return left(UnExpectedFailure());
     }
   }
 
@@ -61,11 +59,5 @@ class ProductRepoImpl implements ProductRepo {
     } catch (e) {
       return left(UnExpectedFailure());
     }
-  }
-
-  @override
-  Future<Either<Failure, Product>> getById(String id) {
-    // TODO: implement getById
-    throw UnimplementedError();
   }
 }
