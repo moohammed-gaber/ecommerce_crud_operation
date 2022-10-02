@@ -3,7 +3,7 @@ import 'package:ecommerce_crud_operation/app/core/domain/value_objects/value_obj
 
 class ProductPrice extends ValueObject<num> {
   static Either<ValueFailure<String>, num> validate(num input) {
-    if (input > 0) {
+    if (input >= 0) {
       return right(input);
     }
     return left(ValueFailure());

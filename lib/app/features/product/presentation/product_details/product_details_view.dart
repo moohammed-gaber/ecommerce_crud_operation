@@ -19,19 +19,17 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
 
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: Color(0xFFFEFBF9),
+      appBar: AppBar(),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ProductImages(product: product),
-
 /*
-            CachedNetworkImage(
-              imageUrl: product.productColors[0].images[0],
-              height: MediaQuery.of(context).size.height * 0.4,
-              fit: BoxFit.cover,
-            ),
+            Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: BackButton(color: Colors.black)),
 */
+            ProductImages(product: product),
             const SizedBox(height: defaultPadding * 1.5),
             Container(
               padding: const EdgeInsets.fromLTRB(defaultPadding,

@@ -20,6 +20,11 @@ class ProductName extends ValueObject<String> {
       validate(input),
     );
   }
+  factory ProductName.parse(String input) {
+    return ProductName._(
+      right(input),
+    );
+  }
 
   const ProductName._(this.value);
 }

@@ -29,7 +29,7 @@ class VariationCard extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Center(child: Text(text)),
+          child: Center(child: Text(text,textAlign: TextAlign.center,)),
         ),
       ),
     );

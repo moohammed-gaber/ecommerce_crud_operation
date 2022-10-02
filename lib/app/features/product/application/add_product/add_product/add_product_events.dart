@@ -4,7 +4,7 @@ import 'package:ecommerce_crud_operation/app/features/product/domain/value_objec
 abstract class AddProductEvents {
   void onSelectColor(int index);
 
-  void onSelectSize(int index);
+  void onTapSize(int index);
 
   void onPriceChanged(ProductPrice price);
 

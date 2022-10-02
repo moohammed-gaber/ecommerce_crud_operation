@@ -17,7 +17,6 @@ class AddProductView extends GetView<AddProductController>
 
   // create element
   final _formKey = GlobalKey<FormState>();
-  final priceController = TextEditingController();
   final nameController = TextEditingController();
 
   @override
@@ -75,30 +74,32 @@ class AddProductView extends GetView<AddProductController>
                       Get.bottomSheet(AddSizeDialog());
                     },
                     child: Text('Add Size')),
-                SizedBox(height: 50),
-                SizedBox(
-                  height: 80,
-                  child: GetBuilder<AddProductController>(builder: (logic) {
-                    final state = logic.state;
-                    final sizes = state.productSizes;
-                    return ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: sizes.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final size = sizes[index];
-                        return VariationCard(
-                          text: size.getOrCrash(),
-                          onTap: () {
-                            controller.onSelectSize(index);
-                          },
-                          isSelected: state.selectedSizeIndex == index,
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(width: 10);
-                      },
-                    );
-                  }),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: SizedBox(
+                    height: 80,
+                    child: GetBuilder<AddProductController>(builder: (logic) {
+                      final state = logic.state;
+                      final sizes = state.productSizes;
+                      return ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: sizes.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final size = sizes[index];
+                          return VariationCard(
+                            text: size.getOrCrash(),
+                            onTap: () {
+                              controller.onTapSize(index);
+                            },
+                            isSelected: state.selectedSizeIndex == index,
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const SizedBox(width: 10);
+                        },
+                      );
+                    }),
+                  ),
                 ),
                 OutlinedButton(
                     onPressed: () async {
@@ -117,9 +118,10 @@ class AddProductView extends GetView<AddProductController>
                         final variant = variants[index];
                         return VariationCard(
                           text: variant.productSize.getOrCrash() +
-                              '-' +
+                              '\n' +
                               variant.productPrice.getOrCrash().toString() +
-                              '-' +
+                              ' EGP'
+                                  '\n' +
                               variant.productColor.getOrCrash(),
                           onTap: () {
                             controller.onTapVariantCard(index);
@@ -133,6 +135,11 @@ class AddProductView extends GetView<AddProductController>
                     );
                   }),
                 ),
+                OutlinedButton(
+                    onPressed: () async {
+                      controller.onTapClearButton();
+                    },
+                    child: Text('Clear')),
               ],
             ),
           ),
@@ -149,17 +156,14 @@ class AddProductView extends GetView<AddProductController>
   }
 
   @override
-  onSuccessAddVariation() {
-    priceController.clear();
+  onSuccessGenerateVariation() {
+    Get.snackbar('Success', 'Variation Generated');
   }
 
   @override
   onAddProductSuccess() {
     Get.snackbar('Success', 'Product added successfully');
   }
-/*
-    Get.back();
-*/
 
   @override
   Future<ProductPrice?> showVariantPriceBottomSheet() async {
@@ -168,6 +172,11 @@ class AddProductView extends GetView<AddProductController>
 
   @override
   void unFocusVariationPrice() {}
+
+  @override
+  void onFormCleared() {
+    nameController.clear();
+  }
 }
 
 class VariationPriceBottomSheet extends StatelessWidget {

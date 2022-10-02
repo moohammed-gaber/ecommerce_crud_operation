@@ -37,9 +37,16 @@ class AddProductController extends GetxController implements AddProductEvents {
   }
 
   @override
-  void onSelectSize(int index) {
-    state = state.copyWith(selectedSizeIndex: index);
-    update();
+  Future<void> onTapSize(int index) async {
+    final price = await viewContract.showVariantPriceBottomSheet();
+    final selectedSize = state.productSizes[index];
+
+    for (int i = 0; i < state.variants.length; i++) {
+      if (state.variants[i].productSize == selectedSize) {
+        state.variants[i] = state.variants[i].copyWith(productPrice: price);
+        update();
+      }
+    }
   }
 
   @override
@@ -58,7 +65,7 @@ class AddProductController extends GetxController implements AddProductEvents {
         variants.add(ProductVariant(
             productColor: colors[i].color,
             productSize: sizes[j],
-            productPrice: ProductPrice(1)));
+            productPrice: ProductPrice(0)));
       }
     }
     state = state.copyWith(variants: variants);
@@ -84,6 +91,11 @@ class AddProductController extends GetxController implements AddProductEvents {
   Future<void> onTapVariantCard(int index) async {
     final price = await viewContract.showVariantPriceBottomSheet();
     state.variants[index] = state.variants[index].copyWith(productPrice: price);
+    update();
+  }
+
+  void onTapClearButton() {
+    state = ProductState.initial();
     update();
   }
 }

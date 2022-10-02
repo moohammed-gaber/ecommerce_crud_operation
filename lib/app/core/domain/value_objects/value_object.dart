@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 
 abstract class ValueObject<T> {
   const ValueObject();
-
   Either<ValueFailure, T> get value;
 
   /// Throws [UnexpectedValueError] containing the [ValueFailure]

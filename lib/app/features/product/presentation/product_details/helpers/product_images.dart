@@ -38,64 +38,36 @@ class _ProductImagesState extends State<ProductImages> {
                 .map((i) {
               return CachedNetworkImage(
                 imageUrl: i,
-                fit: BoxFit.contain,
-                height: 20,
+                fit: BoxFit.cover,
               );
             }).toList(),
           );
         }),
 
-/*
-        SizedBox(
-          width: getProportionateScreenWidth(238),
-          child: AspectRatio(
-            aspectRatio: 1,
-            child: Hero(
-              tag: widget.product.id.toString(),
-              child: CachedNetworkImage(
-                  imageUrl: widget.product.productColors[0].images[0]),
-            ),
-          ),
-        ),
-*/
-        // SizedBox(height: getProportionateScreenWidth(20)),
         GetBuilder<ProductDetailsController>(builder: (logic) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: widget
-                .product.productColors[controller.state.selectedColor].images
-                .map((e) => buildSmallProductPreview(e))
-                .toList(),
+          return SizedBox(
+            height: 80,
+
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: widget
+                  .product.productColors[controller.state.selectedColor].images
+                  .map((e) => SizedBox(
+                  width: 80,
+                child: buildSmallProductPreview(e),))
+                  .toList(),
+            ),
           );
         })
       ],
     );
   }
 
-  GestureDetector buildSmallProductPreview(String image) {
+  Widget buildSmallProductPreview(String image) {
     // print(index);
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          // selectedImage = index;
-        });
-      },
-      child: AnimatedContainer(
-        duration: defaultDuration,
-        margin: EdgeInsets.only(right: 15),
-        padding: EdgeInsets.all(8),
-        height: getProportionateScreenWidth(48),
-        width: getProportionateScreenWidth(48),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-/*
-          border: Border.all(
-              color: kPrimaryColor.withOpacity(selectedImage == index ? 1 : 0)),
-*/
-        ),
-        child: CachedNetworkImage(imageUrl: image),
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CachedNetworkImage(imageUrl: image, fit: BoxFit.cover,),
     );
   }
 }

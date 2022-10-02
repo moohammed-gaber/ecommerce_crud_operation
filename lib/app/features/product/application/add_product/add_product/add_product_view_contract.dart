@@ -5,7 +5,9 @@ abstract class AddProductViewContract {
 
   onAddProductFailed();
 
-  onSuccessAddVariation();
+  onSuccessGenerateVariation();
+
+  void onFormCleared();
 
   Future<ProductPrice?> showVariantPriceBottomSheet();
 
